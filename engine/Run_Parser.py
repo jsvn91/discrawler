@@ -30,12 +30,11 @@ class DownloadWorker(Thread):
             for module in module_list:
                 mod = importlib.import_module(module)
                 class_ = getattr(mod, module.split(".")[1])
-                m1 = class_()
 
-            m1.url = m1.get_a_input(n)
-            m1.url_id_2 = str(n + 1)
             try:
-                m1.get_category_crawl()
+                m1 = class_()
+                m1.url = m1.get_a_input(n)
+                m1.url_id_2 = str(n + 1)
             except:
 
                 recrawl.append(n)
@@ -50,8 +49,8 @@ class DownloadWorker(Thread):
 if __name__ == '__main__':
     ts = time.time()
 
-    scrapper_name = "scrapper_flipkart_category"
-    module_list = ['scrappers.' + scrapper_name]
+    scrapper_name = "parser_flipkart_category"
+    module_list = ['parsers.' + scrapper_name]
     m1 = object()
 
     for module in module_list:
